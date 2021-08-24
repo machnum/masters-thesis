@@ -1,0 +1,167 @@
+configuration:
+  ##############################################################################
+  ####                            general params                            ####
+  ##############################################################################
+
+  # Use some non tested functions and features. Run in developer's mode.
+  #
+  # accepted values: 0 (= No), 1 (= Yes)
+  # optional
+  dev_mode: 0
+
+  # Use time in terminal info messages.
+  #
+  # accepted values: 0 (= No), 1 (= Yes)
+  # optional
+  use_time: 0
+
+  # Allows to use specific destination path (= path to directory where will be
+  # stored processed files) from parameter.
+  #
+  # When 'allow_destination_directory' is 0, destination_path can be
+  # specified with an optional parameter.
+  #
+  # accepted values: 0 (= No), 1 (= Yes)
+  # optional
+  allow_destination_directory: 0
+
+  # Image will be stored in jpeg2000 (*.jp2) according to NDK standards
+  # https://old.ndk.cz/standardy-digitalizace/standardy-pro-obrazova-data
+  #
+  # accepted values: 0 (= No), 1 (= Yes)
+  # optional
+  use_ndk_standard: 1
+
+  ##############################################################################
+  ####                   directories, compress params                       ####
+  ##############################################################################
+
+  # Default directory where will be processed files stored.
+  # This is used only when 'allow_destination_directory' values is 0
+  #
+  # accepted values: string (correctly formatted filepath)
+  # required
+  destination_dir_name: data/processed/master
+
+  # Name of directory where archival master copy will be stored
+  #
+  # accepted values: string
+  # required (when 'use_ndk_standard' is 1)
+  dest_dir_archival: archival
+
+  # Name of directory where production master copy will be stored
+  #
+  # accepted values: string
+  # required (when 'use_ndk_standard' is 1)
+  dest_dir_production: production
+
+  # Basic directory for files used by the neural network.
+  #
+  # accepted values: string (correctly formatted filepath)
+  # required
+  nn_base_dir: conf/models
+
+  ##############################################################################
+  ####                          compress params                             ####
+  ##############################################################################
+  # Values used for compression to JPEG2000 according to NDK standards
+  # ndk standards:
+  # https://old.ndk.cz/standardy-digitalizace/standardy-pro-obrazova-data
+  # prefix 'arch_' is used for archival parameters
+  # prefix 'prod_' is used for production parameters
+  #
+  # all required
+
+  ########################################################
+  ####           compress params - archival           ####
+  ########################################################
+
+  # NDK name: Tiling
+  # accepted values: 2-tuple with integers
+  arch_tile_size: (4096, 4096)
+
+  # NDK name: Quality Layers
+  # accepted values: integer
+  arch_quality_layers: 1
+
+  # NDK name: Code block size
+  # accepted values: 2-tuple with integers
+  arch_codeblock_size: (64, 64)
+
+  # NDK name: Precinct_size
+  # accepted values: 2-tuple with integers
+  arch_precinct_size: (256, 256)
+
+  # NDK name: Transformation
+  # accepted values: 0 (= DWT 5-3 irreversible filter),
+  #                  1 (= DWT 9-7 irreversible filter)
+  arch_irreversible: 0,
+
+  # NDK name: Progression order
+  # accepted values: LRCP, RLCP, RPCL, PCRL, CPRL
+  arch_progression: RPCL
+
+  ########################################################
+  ####          compress params - production          ####
+  ########################################################
+
+  # NDK name: Tiling
+  # accepted values: 2-tuple with integers
+  prod_tile_size: (1024, 1024)
+
+  # NDK name: Quality Layers
+  # accepted values: integer
+  prod_quality_layers: 12
+
+  # NDK name: Quality Layers
+  # accepted values: integer
+  prod_codeblock_size: (64, 64)
+
+  # NDK name: Code block size
+  # accepted values: 2-tuple with integers
+  prod_precinct_size: (256, 256)
+
+  # NDK name: Transformation
+  # accepted values: 0 (= DWT 5-3 irreversible filter),
+  #                  1 (= DWT 9-7 irreversible filter)
+  prod_irreversible: 1
+
+  # NDK name: Progression order
+  # accepted values: LRCP, RLCP, RPCL, PCRL, CPRL
+  prod_progression: RPCL
+
+  ##############################################################################
+  ####                             extensions                               ####
+  ##############################################################################
+
+  # Extension used in new created post-processed files
+  # Ignored, when 'use_ndk_standard' is 1 and automatically is set to .jp2
+  #
+  # accepted values: .png, .bmp, .jpg, .tif
+  # required
+  store_extension: .tif
+
+  # List of file extensions which could be processed
+  # Application process only files with extension specified in this list
+  #
+  # accepted values: .png, .bmp, .jpg, .tif
+  # required
+  allowed_extensions:
+    - .tif
+    - .tiff
+
+  ##############################################################################
+  ####                          crop config items                           ####
+  ##############################################################################
+
+  # Save average image masks to files.
+  #
+  # accepted values: 0 (= No), 1 (= Yes)
+  # optional
+  save_mask: 1
+
+  # Save average image masks to files.
+  #
+  # accepted values: string
+  # required (when 'save_mask' is 1)
+  mask_dir_name: tmp
