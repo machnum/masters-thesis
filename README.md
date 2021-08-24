@@ -91,7 +91,7 @@ python main.py foo/bar -d foo/bar/result -m 1
 ```
 
 ## Contact information to the programmer
-email: [libor.machalek01@upol.cz](mailto:libor.machalek01@upol.cz) případně [libor.machalek01@gmail.com](mailto:libor.machalek01@gmail.com)
+email: [libor.machalek01@upol.cz](mailto:libor.machalek01@upol.cz)
 
 ## License
 GNU/GPL - GNU GENERAL PUBLIC LICENSE
